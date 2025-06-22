@@ -1,13 +1,10 @@
-from utils import select_interface
+import sys
 from wifi_scan import scan_wifi
 from wifi_attack import attack_menu
 from packet_capture import capture_packets
 from packet_analyze import analyze_packets
 
 def main_menu():
-    iface = None
-    while not iface:
-        iface = select_interface()
     while True:
         print("""
    ___      _        _        _      _  __ _       
@@ -20,23 +17,20 @@ def main_menu():
         2. Attack WiFi (handshake, deauth, dll)
         3. Capture/Sniff Paket
         4. Analisa Paket (.pcap)
-        5. Ganti Interface WiFi
-        6. Keluar
+        5. Keluar
         """)
-        choice = input("Pilih menu [1-6]: ").strip()
+        choice = input("Pilih menu [1-5]: ").strip()
         if choice == '1':
-            scan_wifi(iface)
+            scan_wifi()
         elif choice == '2':
-            attack_menu(iface)
+            attack_menu()
         elif choice == '3':
-            capture_packets(iface)
+            capture_packets()
         elif choice == '4':
             analyze_packets()
         elif choice == '5':
-            iface = select_interface()
-        elif choice == '6':
             print("Keluar. Terima kasih!")
-            break
+            sys.exit(0)
         else:
             print("Menu tidak valid.")
 
